@@ -9,38 +9,28 @@ namespace Lab11
         {
             InitializeComponent();
 
-            this.Size = new Size(800, 600);
-            this.Text = "Малювання мишею";
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint
+            | ControlStyles.UserPaint
+            | ControlStyles.OptimizedDoubleBuffer, true);
+            this.UpdateStyles();
+
+            this.Size = new Size(1920, 1080);
+            this.Text = "Mouse drawning";
             this.BackColor = Color.White;
 
-            // Створюємо полотно для малювання
             canvas = new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
 
-            // Підписка на події миші
             this.MouseDown += Form1_MouseDown;
             this.MouseUp += Form1_MouseUp;
             this.MouseMove += Form1_MouseMove;
             this.MouseClick += Form1_MouseClick;
-
-            // Щоб полотно автоматично перерисовувалося при Resize
-            this.Resize += (s, e) =>
-            {
-                var newCanvas = new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
-                using (Graphics g = Graphics.FromImage(newCanvas))
-                {
-                    g.Clear(Color.White);
-                    g.DrawImage(canvas, Point.Empty);
-                }
-                canvas = newCanvas;
-                this.Invalidate();
-            };
         }
         private void Form1_MouseDown(object? sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Middle)
             {
                 isDrawing = true;
-                lastPoint = e.Location; // запам'ятовуємо точку початку
+                lastPoint = e.Location; 
             }
         }
 

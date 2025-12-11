@@ -13,7 +13,7 @@ namespace Lab10
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(
                 (Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
-                Screen.PrimaryScreen.Bounds.Height - this.Height
+                Screen.PrimaryScreen.WorkingArea.Height - this.Height
             );
 
             Console.WriteLine("Location: " + this.Location);
